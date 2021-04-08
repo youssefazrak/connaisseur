@@ -1,9 +1,9 @@
 # configure connaisseur deployment
 deployment:
   replicasCount: 3
-  image: securesystemsengineering/connaisseur:v1.4.5
-  helmHookImage: securesystemsengineering/connaisseur:helm-hook-v1.0
-  imagePullPolicy: Always
+  image: a/d:7
+  helmHookImage: a/h:7
+  imagePullPolicy: IfNotPresent
   resources: {}
   # limits:
   #   cpu: 100m
@@ -68,4 +68,4 @@ policy:
 # interrupting operation.
 detection_mode: false
 
-# debug: true
+debug: true

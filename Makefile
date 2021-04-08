@@ -7,8 +7,8 @@ HELM_HOOK_IMAGE := $(shell yq e '.deployment.helmHookImage' helm/values.yaml)
 all: docker install
 
 docker:
-	docker build -f docker/Dockerfile -t $(IMAGE) .
-	docker build -f docker/Dockerfile.hook -t $(HELM_HOOK_IMAGE) .
+	docker build -f docker/Dockerfile -t a/d:7 .
+	docker build -f docker/Dockerfile.hook -t a/h:7 .
 
 certs:
 	bash helm/certs/gen_certs.sh

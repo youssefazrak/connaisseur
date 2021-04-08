@@ -21,8 +21,7 @@ RUN sh /harden.sh && rm /harden.sh
 COPY --from=builder /install /usr/local
 COPY connaisseur /app/connaisseur
 
-USER 1000:2000
 
 LABEL maintainer="Philipp Belitz <philipp.belitz@securesystems.de>"
 
-CMD ["python", "-m", "connaisseur"]
+CMD ["gunicorn", "--bind=0.0.0.0:5000", "connaisseur.__main__:APP"]

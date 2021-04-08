@@ -48,6 +48,8 @@ spec:
             - name: {{ .Chart.Name }}-certs
               mountPath: /etc/certs
               readOnly: true
+            - mountPath: /tmp
+              name: tmp
           envFrom:
             - configMapRef:
                 name: {{ .Chart.Name }}-env
@@ -91,3 +93,5 @@ spec:
         - name: {{ .Chart.Name }}-certs
           secret:
             secretName: {{ .Chart.Name }}-tls
+        - emptyDir: {} # might be bad since uses node storage
+          name: tmp
