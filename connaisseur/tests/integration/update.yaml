@@ -19,7 +19,3 @@ policy:
     verify: true
   - pattern: "docker.io/securesystemsengineering/connaisseur:helm-hook-*"
     verify: false
-  - pattern: "docker.io/a/h:*"
-    verify: false
-  - pattern: "docker.io/a/d:*"
-    verify: false

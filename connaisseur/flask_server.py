@@ -7,7 +7,6 @@ from connaisseur.exceptions import BaseConnaisseurException, UnknownVersionError
 from connaisseur.mutate import admit, validate
 from connaisseur.notary_api import health_check
 from connaisseur.admission_review import get_admission_review
-from logging.config import dictConfig
 import connaisseur.kube_api as api
 
 DETECTION_MODE = os.environ.get("DETECTION_MODE", "0") == "1"
@@ -17,25 +16,6 @@ APP = Flask(__name__)
 Flask Server that admits the request send to the k8s cluster, validates it and
 sends its response back.
 """
-
-LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO")
-
-dictConfig(
-    {
-        "version": 1,
-        "formatters": {
-            "default": {"format": "[%(asctime)s] %(levelname)s: %(message)s"}
-        },
-        "handlers": {
-            "wsgi": {
-                "class": "logging.StreamHandler",
-                "stream": "ext://flask.logging.wsgi_errors_stream",
-                "formatter": "default",
-            }
-        },
-        "root": {"level": LOG_LEVEL, "handlers": ["wsgi"]},
-    }
-)
 
 
 @APP.route("/mutate", methods=["POST"])
