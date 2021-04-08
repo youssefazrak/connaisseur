@@ -24,4 +24,4 @@ COPY connaisseur /app/connaisseur
 
 LABEL maintainer="Philipp Belitz <philipp.belitz@securesystems.de>"
 
-CMD ["gunicorn", "--bind=0.0.0.0:5000", "connaisseur.__main__:APP"]
+CMD ["gunicorn", "--bind=0.0.0.0:5000", "connaisseur.flask_server:APP", "--certfile=/etc/certs/tls.crt", "--keyfile=/etc/certs/tls.key", "--workers=4"]
