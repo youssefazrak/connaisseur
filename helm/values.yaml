@@ -67,3 +67,5 @@ policy:
 # and logged. This allows testing the functionality without
 # interrupting operation.
 detection_mode: false
+
+debug: true
