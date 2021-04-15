@@ -1,5 +1,5 @@
 deployment:
-  imagePullPolicy: Never
+  imagePullPolicy: IfNotPresent
 notary:
   host: notary.docker.io
   selfsigned: false
@@ -15,8 +15,6 @@ policy:
     verify: true
   - pattern: "k8s.gcr.io/*:*"
     verify: false
-  - pattern: "docker.io/securesystemsengineering/connaisseur:*"
-    verify: true
   - pattern: "docker.io/securesystemsengineering/connaisseur:helm-hook-*"
     verify: false
   - pattern: "docker.io/a/d:*"
