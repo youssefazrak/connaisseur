@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ .Chart.Name }}-install-webhook-job
-  namespace: {{ .Release.namespace }}
+  namespace: {{ .Release.Namespace }}
   annotations:
     helm.sh/hook: post-install
     helm.sh/hook-weight: "5"
@@ -34,6 +34,27 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ .Chart.Name }}-env
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "50m"
+            limits:
+              memory: "64Mi"
+              cpu: "100m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsGroup: 2000
+            runAsNonRoot: true
+            runAsUser: 1000
+            {{- if gt (.Capabilities.KubeVersion.Minor | int) 18 }}
+            seccompProfile:
+              type: RuntimeDefault
+            {{- end }}
       volumes:
         - name: webhook-data
           configMap:
@@ -45,7 +66,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ .Chart.Name }}-delete-webhook-job
-  namespace: {{ .Release.namespace }}
+  namespace: {{ .Release.Namespace }}
   annotations:
     helm.sh/hook: pre-delete, pre-upgrade
     helm.sh/hook-weight: "5"
@@ -77,6 +98,27 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ .Chart.Name }}-env
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "50m"
+            limits:
+              memory: "64Mi"
+              cpu: "100m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsGroup: 2000
+            runAsNonRoot: true
+            runAsUser: 1000
+            {{- if gt (.Capabilities.KubeVersion.Minor | int) 18 }}
+            seccompProfile:
+              type: RuntimeDefault
+            {{- end }}
       restartPolicy: OnFailure
 ---
 
@@ -84,7 +126,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ .Chart.Name }}-upgrade-webhook-job
-  namespace: {{ .Release.namespace }}
+  namespace: {{ .Release.Namespace }}
   annotations:
     helm.sh/hook: post-upgrade
     helm.sh/hook-weight: "5"
@@ -119,6 +161,27 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ .Chart.Name }}-env
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "50m"
+            limits:
+              memory: "64Mi"
+              cpu: "100m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsGroup: 2000
+            runAsNonRoot: true
+            runAsUser: 1000
+            {{- if gt (.Capabilities.KubeVersion.Minor | int) 18 }}
+            seccompProfile:
+              type: RuntimeDefault
+            {{- end }}
       volumes:
         - name: webhook-data
           configMap:
