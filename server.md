@@ -1,5 +1,5 @@
 Flask - While lightweight and easy to use, Flask’s built-in server is not suitable for production https://flask.palletsprojects.com/en/1.1.x/deploying
-
+Flask - When running publicly rather than in development, you should not use the built-in development server (flask run). The development server is provided by Werkzeug for convenience, but is not designed to be particularly efficient, stable, or secure.   https://flask.palletsprojects.com/en/1.1.x/tutorial/deploy/
 Some list at https://flask.palletsprojects.com/en/1.1.x/deploying/wsgi-standalone/
 
 bjoern - python2
