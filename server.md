@@ -12,11 +12,15 @@ error at 2 processes (felt like fewer though):
 Allowed an unsigned image via init container or failed due to an unexpected error handling init containers. Output:
 Error from server (InternalError): error when creating "connaisseur/tests/integration/valid_container_with_unsigned_init_container_image.yml": Internal error occurred: failed calling webhook "connaisseur-svc.connaisseur.svc": Post "https://connaisseur-svc.connaisseur.svc:443/mutate?timeout=30s": net/http: request canceled (Client.Timeout exceeded while awaiting headers)
 
+cheroot (default numthreads=10)
+
 ## errors
 
 Flask tests 11/50 (failed due to timeout/tests run)
 gunicorn with 4 workers (6/50)
 uwgsi with 2p and 1t  (6/50)
+cheroot (3 or 4/50) 3 timeouts and
+Error from server: error when creating "connaisseur/tests/integration/valid_container_with_unsigned_init_container_image.yml": admission webhook "connaisseur-svc.connaisseur.svc" denied the request: unknown error. please check the logs.
 
 feels like higher error if vm in background
 
@@ -44,3 +48,10 @@ NAME                                      CPU(cores)   MEMORY(bytes)
 connaisseur-deployment-6cd449d678-4kh82   16m          56Mi            
 connaisseur-deployment-6cd449d678-wgqs8   14m          57Mi            
 connaisseur-deployment-6cd449d678-xhv97   14m          57Mi
+
+### cheroot
+kubectl top pods
+NAME                                      CPU(cores)   MEMORY(bytes)
+connaisseur-deployment-6cd449d678-d79fj   23m          31Mi
+connaisseur-deployment-6cd449d678-hw4b5   25m          35Mi
+connaisseur-deployment-6cd449d678-rxpqp   96m          33Mi
