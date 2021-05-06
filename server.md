@@ -18,6 +18,7 @@ cheroot (default numthreads=10)
 
 Flask tests 11/50 (failed due to timeout/tests run)
 gunicorn with 4 workers (6/50)
+gunicorn with 10 workers (0/50)
 uwgsi with 2p and 1t  (6/50)
 cheroot (3 or 4/50) 3 timeouts and
 Error from server: error when creating "connaisseur/tests/integration/valid_container_with_unsigned_init_container_image.yml": admission webhook "connaisseur-svc.connaisseur.svc" denied the request: unknown error. please check the logs.
@@ -34,13 +35,20 @@ connaisseur-deployment-79db9b9f58-9vnrb   17m          26Mi
 connaisseur-deployment-79db9b9f58-b6fcw   13m          25Mi            
 connaisseur-deployment-79db9b9f58-h44gk   13m          25Mi
 
-### gunicorn
+### gunicorn (4 workers)
 
 kubectl top pods
 NAME                                      CPU(cores)   MEMORY(bytes)   
 connaisseur-deployment-6cd449d678-f6xsf   18m          114Mi           
 connaisseur-deployment-6cd449d678-ml54j   23m          118Mi           
 connaisseur-deployment-6cd449d678-qkpqs   13m          119Mi 
+
+### gunicorn (10 workers)
+kubectl top pods
+NAME                                      CPU(cores)   MEMORY(bytes)   
+connaisseur-deployment-694795df49-62sm6   15m          247Mi           
+connaisseur-deployment-694795df49-7q7gm   15m          246Mi           
+connaisseur-deployment-694795df49-8l5lk   41m          246Mi         
 
 ### uwsgi 
 kubectl top pods
