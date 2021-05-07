@@ -23,7 +23,12 @@ uwgsi with 2p and 1t  (6/50)
 cheroot (3 or 4/50) 3 timeouts and
 Error from server: error when creating "connaisseur/tests/integration/valid_container_with_unsigned_init_container_image.yml": admission webhook "connaisseur-svc.connaisseur.svc" denied the request: unknown error. please check the logs.
 
-feels like higher error if vm in background
+
+
+50 iterations, order per iteration random; timeout + unknown
+cheroot 4+1
+uwsgi 4+0
+gunicorn 3+1
 
 ## resources
 
