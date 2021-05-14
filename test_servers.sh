@@ -10,7 +10,10 @@ for i in {1..50}; do
     current_sha=${shas[${index}]}
     echo "Iteration ${i}; testing sha ${current_sha}"
     git checkout ${current_sha}
-    bash connaisseur/tests/integration/integration-test.sh >> "test_${current_sha}.log" 2>&1
+    make docker
+    kind load docker-image a/d:7
+    kind load docker-image a/h:7
+    bash connaisseur/tests/integration/integration-test.sh >> "correct_test_${current_sha}.log" 2>&1
     if [[ $? -ne 0 ]]; then
       failed=$((${failed} + 1))
       echo "[FAIL] Failed for try $i and sha ${current_sha}"

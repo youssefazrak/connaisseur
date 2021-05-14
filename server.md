@@ -26,9 +26,9 @@ Error from server: error when creating "connaisseur/tests/integration/valid_cont
 
 
 50 iterations, order per iteration random; timeout + unknown
-cheroot 4+1
-uwsgi 4+0
-gunicorn 3+1
+cheroot 2
+uwsgi 3
+gunicorn 2
 
 ## resources
 
