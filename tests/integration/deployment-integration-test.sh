@@ -25,7 +25,7 @@ fi
 echo 'Testing 1 unsigned image deployment...'
 kubectl apply -f tests/integration/deployments/deployment_i1u1.yaml >output.log 2>&1 || true
 
-if [[ ! "$(cat output.log)" =~ 'admission webhook "connaisseur-svc.connaisseur.svc" denied the request: Unable to find signed digest' ]]; then
+if [[ ! "$(cat output.log)" =~ 'denied the request: Unable to find signed digest' ]]; then
   echo 'Failed to deny deployment with unsigned image or failed with unexpected error. Output:'
   cat output.log
   exit 1
@@ -47,7 +47,7 @@ fi
 echo 'Testing 1 signed image and 1 unsigned image deployment...'
 kubectl apply -f tests/integration/deployments/deployment_i2u1.yaml >output.log 2>&1 || true
 
-if [[ ! "$(cat output.log)" =~ 'admission webhook "connaisseur-svc.connaisseur.svc" denied the request: Unable to find signed digest' ]]; then
+if [[ ! "$(cat output.log)" =~ 'denied the request: Unable to find signed digest' ]]; then
   echo 'Failed to deny deployment with unsigned image or failed with unexpected error. Output:'
   cat output.log
   exit 1
@@ -58,7 +58,7 @@ fi
 echo 'Testing 2 unsigned images deployment...'
 kubectl apply -f tests/integration/deployments/deployment_i2u1.yaml >output.log 2>&1 || true
 
-if [[ ! "$(cat output.log)" =~ 'admission webhook "connaisseur-svc.connaisseur.svc" denied the request: No trust data for image' ]]; then
+if [[ ! "$(cat output.log)" =~ 'denied the request: No trust data for image' ]]; then
   echo 'Failed to deny deployment with unsigned images or failed with unexpected error. Output:'
   cat output.log
   exit 1
@@ -80,7 +80,7 @@ fi
 echo 'Testing 2 signed images and 1 unsigned init container deployment...'
 kubectl apply -f tests/integration/deployments/deployment_i2ui.yaml >output.log 2>&1 || true
 
-if [[ ! "$(cat output.log)" =~ 'admission webhook "connaisseur-svc.connaisseur.svc" denied the request: Unable to find signed digest for image' ]]; then
+if [[ ! "$(cat output.log)" =~ 'denied the request: Unable to find signed digest for image' ]]; then
   echo 'Failed to deny deployment with unsigned images or failed with unexpected error. Output:'
   cat output.log
   exit 1
