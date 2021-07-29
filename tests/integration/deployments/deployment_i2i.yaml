@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: i2-init-deployment
+  name: i2i-deployment
   labels:
-    app: i2-init
+    app: i2i
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: i2-init
+      app: i2i
   template:
     metadata:
       labels:
-        app: i2-init
+        app: i2i
     spec:
       containers:
       - name: nginx
