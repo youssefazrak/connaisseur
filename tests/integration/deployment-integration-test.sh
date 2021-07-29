@@ -44,8 +44,8 @@ else
   echo 'Successfully allowed deployment'
 fi
 
-echo 'Testing 1 signed image and 1 unsigned image deployment...'
-kubectl apply -f tests/integration/deployments/deployment_i2u1.yaml >output.log 2>&1 || true
+echo 'Testing 1 signed image (first) and 1 unsigned (second) image deployment...'
+kubectl apply -f tests/integration/deployments/deployment_i2u1-2.yaml >output.log 2>&1 || true
 
 if [[ ! "$(cat output.log)" =~ 'denied the request: Unable to find signed digest' ]]; then
   echo 'Failed to deny deployment with unsigned image or failed with unexpected error. Output:'
@@ -55,8 +55,19 @@ else
   echo 'Successfully denied deployment'
 fi
 
+echo 'Testing 1 signed image (second) and 1 unsigned (first) image deployment...'
+kubectl apply -f tests/integration/deployments/deployment_i2u1-1.yaml >output.log 2>&1 || true
+
+if [[ ! "$(cat output.log)" =~ 'denied the request: No trust data' ]]; then
+  echo 'Failed to deny deployment with unsigned image or failed with unexpected error. Output:'
+  cat output.log
+  exit 1
+else
+  echo 'Successfully denied deployment'
+fi
+
 echo 'Testing 2 unsigned images deployment...'
-kubectl apply -f tests/integration/deployments/deployment_i2u1.yaml >output.log 2>&1 || true
+kubectl apply -f tests/integration/deployments/deployment_i2u2.yaml >output.log 2>&1 || true
 
 if [[ ! "$(cat output.log)" =~ 'denied the request: Unable to find signed digest for image' ]]; then
   echo 'Failed to deny deployment with unsigned images or failed with unexpected error. Output:'

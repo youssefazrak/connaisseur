@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: i2u1-deployment
+  name: i2u1-2-deployment
   labels:
-    app: i2u1
+    app: i2u1-2
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: i2u1
+      app: i2u1-2
   template:
     metadata:
       labels:
-        app: i2u1
+        app: i2u1-2
     spec:
       containers:
       - name: cosigned
