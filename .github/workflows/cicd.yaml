@@ -159,7 +159,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        integration-test-script: [ 'integration-test.sh', 'preconfig-integration-test.sh', 'cosign-integration-test.sh', 'namespaced-integration-test.sh', 'deployment-integration-test.sh']
+        integration-test-script: [
+          'integration-test.sh',
+          'preconfig-integration-test.sh',
+          'cosign-integration-test.sh',
+          'namespaced-integration-test.sh',
+          'deployment-integration-test.sh'
+        ]
     services:
       alerting-endpoint:
         image: securesystemsengineering/alerting-endpoint
