@@ -11,6 +11,9 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "helm.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: pre-install
+    helm.sh/hook-delete-policy: before-hook-creation
 type: Opaque
 data:
   tls.crt: {{ $certs.Cert | b64enc }}
@@ -24,7 +27,7 @@ metadata:
   labels:
     {{- include "helm.labels" . | nindent 4 }}
   annotations:
-    helm.sh/hook: post-install, post-upgrade
+    helm.sh/hook: post-install
     helm.sh/hook-delete-policy: hook-succeeded, hook-failed
 data:
   webhook.yaml: |

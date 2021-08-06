@@ -36,15 +36,15 @@ validators:
   approve: false
 # the `default` validator is used if no validator is specified in image policy
 - name: default
-  type: notaryv1  # or other supported validator (e.g. "cosign")
-  host: notary.docker.io # in case of notaryv1, configure the notary server to be used
+  type: cosign  # or other supported validator (e.g. "cosign")
   trust_roots:
   # # the `default` key is used if no key is specified in image policy
-  #- name: default
-  #  key: |  # enter your public key below
-  #    -----BEGIN PUBLIC KEY-----
-  #    <add your public key here>
-  #    -----END PUBLIC KEY-----
+  - name: default
+    key: |  # enter your public key below
+      -----BEGIN PUBLIC KEY-----
+      MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEWZzVzkb8A+DbgDpaJId/bOmV8n7Q
+      OqxYbK0Iro6GzSmOzxkn+N2AKawLyXi84WSwJQBK//psATakCgAQKkNTAA==
+      -----END PUBLIC KEY-----
   #cert: |  # in case the trust data host is using a self-signed certificate
   #  -----BEGIN CERTIFICATE-----
   #  ...
