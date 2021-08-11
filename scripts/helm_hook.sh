@@ -16,7 +16,8 @@ elif [ "$1" == "upgrade" ]
 then
     echo "upgrading ..."
     DEPLOYMENT=$(kubectl -n ${CONNAISSEUR_NAMESPACE} get deployments.apps -lapp.kubernetes.io/instance=connaisseur -o=jsonpath='{.items[*].metadata.name}')
-    kubectl rollout status ${DEPLOYMENT} -n ${CONNAISSEUR_NAMESPACE}
+    kubectl delete pods -lapp.kubernetes.io/instance=connaisseur -n ${CONNAISSEUR_NAMESPACE} --wait=false
+    kubectl wait --for=condition=available --timeout=600s deployments.apps/${DEPLOYMENT} -n ${CONNAISSEUR_NAMESPACE}
     kubectl apply -f /data/webhook.yaml
     kubectl delete pod -lapp.kubernetes.io/service=bootstrap -n ${CONNAISSEUR_NAMESPACE} --force=true
     echo "done."
